@@ -1,0 +1,50 @@
+{% extends 'Blogs/base.html' %}
+
+{% block content %}
+<div id="container">
+  {% for post in post_list %}
+    <div id="post">
+      <div id="title">
+        <a>{{ post.title }}<br></a>
+        <div id="author">{{ post.author }}</div>
+        <div id="date">{{ post.publish_date }}</div>
+      </div>
+      <div id="text">
+        {{ post.text }}
+      </div>
+      <div id="comments">
+        {% if user.is_authenticated and user == post.author %}
+          {% for comment in post.unapproved_comments %}
+            <div id="comment_author">
+              {{ comment.author }}: <small id="small">{{ comment.text }}</small>
+            </div>
+            <a href="{% url 'Blogs:comment_approve' pk=comment.pk %}"><button class="post_button" id="commentButton" >Approve</button></a>
+          {% endfor %}
+        {% endif %}
+        {% for comment in post.approved_comments %}
+          <div id="comment_author">
+            {{ comment.author }}: <small id="small">{{ comment.text }}</small>
+          </div>
+          {% empty %}
+            <p>No Comments!</p>
+        {% endfor %}
+      </div>
+      {% if user.is_authenticated %}
+        {% if user == post.author %}
+          {% if not post.publish_date %}
+          <a href="{% url 'Blogs:post_publish' pk=post.pk %}"><button id="publishButton" class="post_button">Publish</button></a>
+          {% else %}
+            <a href="{% url 'Blogs:add_comment_to_post' pk=post.pk %}"><button id="commentButton" class="post_button">Comment</button></a>
+          {% endif %}
+        {% endif %}
+        <a href="{% url 'Blogs:post_edit' pk=post.pk %}"><button id="editButton" class="post_button">Edit</button></a>
+        <a href="{% url 'Blogs:post_delete' pk=post.pk %}"><button id="deleteButton" class="post_button">Delete</button></a>
+      {% endif %}
+    </div>
+    {% empty %}
+    <div id="empty">
+      No posts!
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'Blogs/base.html' %}
+
+{% block title %}Drafts{% endblock %}
+
+{% block content %}
+  <div id="container">
+    {% for post in post_list %}
+      <div id="post">
+        <div id="title">
+          <a>{{ post.title }}<br></a>
+          <div id="author">{{ post.author }}</div>
+          <div id="date">{{ post.create_date }}</div>
+        </div>
+        <div id="text">
+          {{ post.text }}
+        </div>
+        <!-- TODO: Make sure no one can add comments to unpublihsed posts. -->
+        {% if user.is_authenticated %}
+          <a href="{% url 'Blogs:post_edit' pk=post.pk %}"><button id="editButton" class="post_button">Edit</button></a>
+          <a href="{% url 'Blogs:post_delete' pk=post.pk %}"><button id="deleteButton" class="post_button">Delete</button></a>
+          <a href="{% url 'Blogs:post_publish' pk=post.pk %}"><button id="publishButton" class="post_button">Publish</button></a>
+        {% endif %}
+      </div>
+      {% empty %}
+        <div id="empty">
+          No posts!
+        </div>
+    {% endfor %}
+  </div>
+{% endblock %}

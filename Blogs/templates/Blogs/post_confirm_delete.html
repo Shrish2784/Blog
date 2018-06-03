@@ -1,0 +1,35 @@
+{% extends 'Blogs/base.html' %}
+
+{% block content %}
+  <div id="container">
+      <div id="post">
+        <div id="title">
+          <a>{{ object.title }}<br></a>
+          <div id="author">{{ object.author }}</div>
+          {% if object.publish_date %}
+            <div id="date">{{ object.publish_date }}</div>
+          {% else %}
+            <div id="date">{{ object.create_date }}</div>
+          {% endif %}
+        </div>
+        <div id="text">
+          {{ object.text }}
+        </div>
+        <div id="comments">
+          {% for comment in object.approved_comments %}
+            <div id="comment_author">
+              {{ comment.author }}: <small id="small">{{ comment.text }}</small>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div id="postDeleteForm">
+        <form method="post">
+          {% csrf_token %}
+          <h3>Are you sure you want to delete the post : {{ object }}</h3>
+          <button id="deleteButton" class="post_button" type="submit"> Confirm </button>
+        </form>
+        <a href="{% url 'Blogs:post_list' %}"><button type="reset" class="post_button" id="commentButton" >Cancel</button></a>
+      </div>
+  </div>
+{% endblock %}

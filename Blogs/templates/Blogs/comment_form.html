@@ -1,0 +1,13 @@
+{% extends 'Blogs/base.html' %}
+
+{% block content %}
+<div id="container">
+  <div id="padding-left">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="post_button" id=commentButton>Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
