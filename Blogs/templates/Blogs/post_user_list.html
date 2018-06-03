@@ -10,20 +10,20 @@
         <div id="date">{{ post.publish_date }}</div>
       </div>
       <div id="text">
-        {{ post.text }}
+        {{ post.text|safe }}
       </div>
       <div id="comments">
         {% if user.is_authenticated and user == post.author %}
           {% for comment in post.unapproved_comments %}
             <div id="comment_author">
-              {{ comment.author }}: <small id="small">{{ comment.text }}</small>
+              {{ comment.author }}: <small id="small">{{ comment.text|safe }}</small>
             </div>
             <a href="{% url 'Blogs:comment_approve' pk=comment.pk %}"><button class="post_button" id="commentButton" >Approve</button></a>
           {% endfor %}
         {% endif %}
         {% for comment in post.approved_comments %}
           <div id="comment_author">
-            {{ comment.author }}: <small id="small">{{ comment.text }}</small>
+            {{ comment.author }}: <small id="small">{{ comment.text|safe }}</small>
           </div>
           {% empty %}
             <p>No Comments!</p>

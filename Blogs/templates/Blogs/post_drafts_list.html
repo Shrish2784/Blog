@@ -12,7 +12,7 @@
           <div id="date">{{ post.create_date }}</div>
         </div>
         <div id="text">
-          {{ post.text }}
+          {{ post.text|safe }}
         </div>
         <!-- TODO: Make sure no one can add comments to unpublihsed posts. -->
         {% if user.is_authenticated %}

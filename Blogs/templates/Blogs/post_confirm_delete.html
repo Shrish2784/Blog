@@ -13,12 +13,12 @@
           {% endif %}
         </div>
         <div id="text">
-          {{ object.text }}
+          {{ object.text|safe }}
         </div>
         <div id="comments">
           {% for comment in object.approved_comments %}
             <div id="comment_author">
-              {{ comment.author }}: <small id="small">{{ comment.text }}</small>
+              {{ comment.author }}: <small id="small">{{ comment.text|safe }}</small>
             </div>
           {% endfor %}
         </div>

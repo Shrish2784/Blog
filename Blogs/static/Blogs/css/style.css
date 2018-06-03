@@ -79,6 +79,8 @@ header {
 }
 #comment_author {
   font-size: 25px;
+  border-left: 2px solid rgb(0, 100, 100);
+  padding-left: 10px;
 }
 .post_button {
   border: 0px;
