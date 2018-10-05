@@ -90,6 +90,22 @@ header {
   color: white;
   font-size: 15px;
 }
+#profile {
+  padding: 0 20px;
+}
+#profile #username {
+  font-size: 35px;
+}
+#profile #email {
+  font-size: 25px;
+}
+#changePassButton {
+  padding: 10px;
+  background-color: rgb(0, 100, 100);
+  color: white;
+  border: none;
+  outline: none;
+}
 #commentButton {
   background-color: rgb(0, 100, 100);
 }

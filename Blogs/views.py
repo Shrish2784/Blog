@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 from django.views.generic import (
     TemplateView,
@@ -36,6 +37,10 @@ class PostUserListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return models.Post.objects.filter(author=self.request.user).order_by('-publish_date')
 
+class ProfileDetailView(DetailView):
+    model = User
+    template_name = 'Blogs/user_detail.html'
+    # context_object_name = 'user'
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     login_url = 'login/'

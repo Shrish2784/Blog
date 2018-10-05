@@ -1,0 +1,20 @@
+{% extends 'Blogs/base.html' %}
+
+{% block content %}
+{% if user %}
+<div id="container">
+    <div id="profile">
+        <div id="username">
+            <h2>{{ user.username }}</h2>
+        </div>
+        <div id="email">
+            <h3>{{ user.email }}</h3>
+        </div>
+        <a href="{% url 'password_change' %}">
+            <button id="changePassButton">Change Pass</button>
+        </a>
+    </div>
+    
+</div>
+{% endif %}
+{% endblock %}
